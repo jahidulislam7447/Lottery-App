@@ -1,0 +1,28 @@
+# Flutter/Dart/Pub generated files
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.metadata
+
+# Android Studio / IntelliJ
+*.iml
+.idea/
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Crash logs
+crash.log
+crash.*.log
+
+# Local environment files
+.env
+.env.*
+!.env.example

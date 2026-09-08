@@ -47,16 +47,16 @@ class EntryPage extends StatelessWidget {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       gradient: const LinearGradient(colors: [Color(0xFF2C7CE7), Color(0xFF0A4DBA)]),
-                      boxShadow: [BoxShadow(color: blue.withOpacity(.25), blurRadius: 16, offset: const Offset(0, 6))],
+                      boxShadow: [BoxShadow(color: blue.withValues(alpha: .25), blurRadius: 16, offset: const Offset(0, 6))],
                     ),
                     child: const Icon(Icons.location_on_rounded, color: Colors.white, size: 36),
                   ),
                   const SizedBox(height: 18),
                   RichText(text: const TextSpan(style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700, color: navy), children: [TextSpan(text: 'Welcome to '), TextSpan(text: 'LuckyDraw', style: TextStyle(color: blue))])),
                   const SizedBox(height: 28),
-                  _LoginField(icon: Icons.person_outline_rounded, hint: 'Phone or Email'),
+                  const _LoginField(icon: Icons.person_outline_rounded, hint: 'Phone or Email'),
                   const SizedBox(height: 12),
-                  _LoginField(icon: Icons.lock_outline_rounded, hint: 'Password', obscure: true),
+                  const _LoginField(icon: Icons.lock_outline_rounded, hint: 'Password', obscure: true),
                   const SizedBox(height: 18),
                   _PrimaryButton(label: 'Login', onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const HomePage()))),
                   const SizedBox(height: 10),
@@ -120,13 +120,39 @@ class _HomePageState extends State<HomePage> {
             IconButton(onPressed: () {}, icon: const Icon(Icons.notifications_none_rounded, color: Colors.white)),
           ]),
           const SizedBox(height: 10),
-          Container(padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 9), decoration: BoxDecoration(color: Colors.white.withOpacity(.16), borderRadius: BorderRadius.circular(8)), child: const Row(children: [Icon(Icons.account_balance_wallet_outlined, size: 16, color: Colors.white), SizedBox(width: 7), Text('Wallet Balance: \$125.00', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 12))])),
+          Container(padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 9), decoration: BoxDecoration(color: Colors.white.withValues(alpha: .16), borderRadius: BorderRadius.circular(8)), child: const Row(children: [Icon(Icons.account_balance_wallet_outlined, size: 16, color: Colors.white), SizedBox(width: 7), Text('Wallet Balance: \$125.00', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 12))])),
         ]),
       ),
       Expanded(child: SingleChildScrollView(padding: const EdgeInsets.fromLTRB(18, 18, 18, 12), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         const Text('Pick Your Numbers', style: TextStyle(fontWeight: FontWeight.bold, color: navy, fontSize: 15)),
         const SizedBox(height: 10),
-        Card(elevation: 0, color: Colors.white, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: const BorderSide(color: Color(0xFFE8ECF2))), child: Padding(padding: const EdgeInsets.all(12), child: GridView.builder(shrinkWrap: true, physics: const NeverScrollableScrollPhysics(), itemCount: 35, gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 7, mainAxisSpacing: 7, crossAxisSpacing: 7), itemBuilder: (_, i) { final n = i + 1; final isSelected = selected.contains(n); return InkWell(onTap: () => setState(() => isSelected ? selected.remove(n) : selected.add(n)), borderRadius: BorderRadius.circular(7), child: Container(alignment: Alignment.center, decoration: BoxDecoration(color: isSelected ? blue : const Color(0xFFF7F8FA), borderRadius: BorderRadius.circular(7), border: Border.all(color: isSelected ? blue : const Color(0xFFE4E7EC))), child: Text('$n', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: isSelected ? Colors.white : navy)))); } }))),
+        Card(
+          elevation: 0,
+          color: Colors.white,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: const BorderSide(color: Color(0xFFE8ECF2))),
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: 35,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 7, mainAxisSpacing: 7, crossAxisSpacing: 7),
+              itemBuilder: (_, i) {
+                final n = i + 1;
+                final isSelected = selected.contains(n);
+                return InkWell(
+                  onTap: () => setState(() => isSelected ? selected.remove(n) : selected.add(n)),
+                  borderRadius: BorderRadius.circular(7),
+                  child: Container(
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(color: isSelected ? blue : const Color(0xFFF7F8FA), borderRadius: BorderRadius.circular(7), border: Border.all(color: isSelected ? blue : const Color(0xFFE4E7EC))),
+                    child: Text('$n', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: isSelected ? Colors.white : navy)),
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
         const SizedBox(height: 18),
         const Text('Your Numbers', style: TextStyle(fontWeight: FontWeight.bold, color: navy, fontSize: 15)),
         const SizedBox(height: 10),

@@ -1,0 +1,3 @@
+# Copy this file to local.properties and set the path to your Flutter SDK.
+# Do not commit local.properties because the path is machine-specific.
+flutter.sdk=/absolute/path/to/flutter
